@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export default function ContactForm() {
   const [general, setGeneral] = useState(false);
   const [support, setSupport] = useState(false);
   const [checked, setChecked] = useState(false);
   const [errors, setErrors] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -31,6 +33,10 @@ export default function ContactForm() {
 
   };
 
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const validateForm = () => {
     const newErrors = {};
     if (!formData.firstName) newErrors.firstName = "This field is required";
@@ -52,7 +58,11 @@ export default function ContactForm() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formData);
+      setShowModal((prev) => !prev);
+      
+      setTimeout(( )=> {
+        setShowModal((prev) => !prev);
+      },5000)
     }
   };
 
@@ -83,6 +93,7 @@ export default function ContactForm() {
   return (
     <div className="h-screen bg-green-100  flex items-center justify-center ">
       <div>
+        {showModal && <Modal />}
         <div className="container mx-auto bg-white w-96 p-8 rounded-lg">
           <h1 className="text-2xl font-bold pb-4">Contact Us</h1>
           <form>
