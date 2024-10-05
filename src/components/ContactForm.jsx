@@ -17,20 +17,15 @@ export default function ContactForm() {
     consent: !checked,
   });
 
- 
-
   const handleConsent = () => {
     setChecked((prev) => {
       const newValue = !prev;
-      if(newValue) {
+      if (newValue) {
         setErrors((prevErrors) => ({ ...prevErrors, consent: undefined }));
-
       }
 
       return newValue;
     });
-
-
   };
 
   const toggleModal = () => {
@@ -59,10 +54,10 @@ export default function ContactForm() {
 
     if (Object.keys(validationErrors).length === 0) {
       setShowModal((prev) => !prev);
-      
-      setTimeout(( )=> {
+
+      setTimeout(() => {
         setShowModal((prev) => !prev);
-      },5000)
+      }, 5000);
     }
   };
 
@@ -91,15 +86,15 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="h-screen bg-green-100  flex items-center justify-center ">
+    <div className="h-screen w-screen bg-green-100  flex items-center justify-center ">
       <div>
         {showModal && <Modal />}
-        <div className="container mx-auto bg-white w-96 p-8 rounded-lg">
-          <h1 className="text-2xl font-bold pb-4">Contact Us</h1>
+        <div className="container mx-auto bg-white md:w-96 sm:max-w-md p-8 rounded-lg">
+          <h1 className="text-2xl font-bold text-black  pb-4">Contact Us</h1>
           <form>
-            <div className="grid grid-cols-2 gap-2">
+            <div className=" md:grid md:grid-cols-2 gap-2">
               <div className="flex flex-col">
-                <label htmlFor="firstName" className="pb-2 ">
+                <label htmlFor="firstName" className="pb-2 text-black text-xs">
                   First Name<span className="text-green-800 pl-2">*</span>
                 </label>
                 <input
@@ -118,8 +113,8 @@ export default function ContactForm() {
                   </div>
                 )}
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="lastName" className="pb-2">
+              <div className="flex flex-col sm:pt-4 md:pt-0">
+                <label htmlFor="lastName" className="pb-2 text-xs text-black">
                   Last Name<span className="text-green-800 pl-2">*</span>
                 </label>
                 <input
@@ -140,7 +135,7 @@ export default function ContactForm() {
               </div>
             </div>
             <div className="flex flex-col py-3">
-              <label htmlFor="email" className="pb-2">
+              <label htmlFor="email" className="pb-2 text-xs text-black">
                 Email<span className="text-green-800 pl-2">*</span>
               </label>
               <input
@@ -159,23 +154,23 @@ export default function ContactForm() {
               )}
             </div>
             <div>
-              <label htmlFor="query">
+              <label htmlFor="query" className="text-xs text-black">
                 Query Type<span className="text-green-800 pl-2">*</span>
               </label>
-              <div className="flex justify-between  pt-3">
+              <div className="gap-2 md:flex md:justify-between pt-3 md:space-x-2">
                 <label
                   onClick={() => toggleQuery()}
                   className={
                     general
-                      ? "bg-green-100/80 border px-4 py-2 border-green-500  rounded-md flex items-center"
-                      : " border px-4 py-2 border-gray-500  rounded-md flex items-center"
+                      ? "bg-green-100/80 border px-4 py-2 border-green-500 rounded-md flex items-center"
+                      : "border px-4 py-2 border-gray-500 rounded-md flex items-center"
                   }
                 >
                   <span
                     className={`w-3 h-3 ring-2 rounded-full ${
                       !general
-                        ? "w-3 h-3 ring-2  ring-gray-400"
-                        : "bg-green-400 ring-2 ring-green-500  ring-offset-2 ring-offset-white "
+                        ? "w-3 h-3 ring-2 ring-gray-400"
+                        : "bg-green-400 ring-2 ring-green-500 ring-offset-2 ring-offset-white"
                     }`}
                   ></span>
 
@@ -183,33 +178,36 @@ export default function ContactForm() {
                     General Enquiry
                   </span>
                 </label>
+
                 <label
                   onClick={() => toggleQuery()}
                   className={
                     support
-                      ? "bg-green-100/80 border px-4 py-2 border-green-500  rounded-md flex items-center"
-                      : " border px-4 py-2 border-gray-500  rounded-md flex items-center"
+                      ? "bg-green-100/80 border px-4 py-2 border-green-500 rounded-md flex items-center mt-2 md:mt-0"
+                      : "border px-4 py-2 border-gray-500 rounded-md flex items-center mt-2 md:mt-0"
                   }
                 >
                   <span
                     className={`w-3 h-3 ring-2 rounded-full ${
                       !support
-                        ? "w-3 h-3 ring-2  ring-gray-400"
-                        : "bg-green-400 ring-2 ring-green-500  ring-offset-2 ring-offset-white "
+                        ? "w-3 h-3 ring-2 ring-gray-400"
+                        : "bg-green-400 ring-2 ring-green-500 ring-offset-2 ring-offset-white"
                     }`}
                   ></span>
+
                   <span className="pl-2 text-xs text-black mb-[1.5px]">
                     Support Request
                   </span>
                 </label>
               </div>
+
               {errors.query && (
                 <div className="text-red-400 text-xs pt-1">{errors.query}</div>
               )}
             </div>
 
             <div className="flex flex-col pt-3">
-              <label htmlFor="message" className="pb-2">
+              <label htmlFor="message" className="pb-2 text-xs text-black">
                 Message<span className="text-green-800 pl-2 ">*</span>
               </label>
               <textarea
@@ -237,7 +235,7 @@ export default function ContactForm() {
                   type="checkbox"
                   className="h-3 w-3 border-gray-500 text-green-600 focus:ring-white"
                 />
-                <span className="pl-2 text-xs">
+                <span className="pl-2 text-xs text-black">
                   I consent to being contacted by the team
                 </span>
                 <span className="text-green-800 pl-1 text-xs">*</span>
