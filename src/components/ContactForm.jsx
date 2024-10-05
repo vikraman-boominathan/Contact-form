@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import emailjs from "@emailjs/browser";
 import Modal from "./Modal";
 
 export default function ContactForm() {
@@ -52,13 +54,39 @@ export default function ContactForm() {
     const validationErrors = validateForm();
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
-      setShowModal((prev) => !prev);
+    const templateParams = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      query: formData.query,
+      message: formData.message,
+      consent: formData.consent ? "Yes" : "No",
+    };
 
-      setTimeout(() => {
-        setShowModal((prev) => !prev);
-      }, 5000);
-    }
+    emailjs
+      .send(
+        "SERVICE_ID",
+        "TEMPLATE_ID", 
+        templateParams, 
+        "PUBLIC_KEY" 
+      )
+      .then(
+        (res) => {
+          if (Object.keys(validationErrors).length === 0 && res.status === 200) {
+            setShowModal((prev) => !prev);
+           
+      
+            setTimeout(() => {
+              setShowModal((prev) => !prev);
+            }, 5000);
+          }
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+
+    
   };
 
   const handleChange = (e) => {
